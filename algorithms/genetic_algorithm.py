@@ -4,7 +4,7 @@ import settings
 class GeneticAlgorithm:
     def __init__(self, tower_type):
         self.num_generations = 5
-        self.num_genes = 5  # accuracy, cooldown, range, firepower, critical_chance
+        self.num_genes = 5  # accuracy, cooldown, range, damage, critical_chance
         self.population_size = 10
         self.tower_type = tower_type
         self.population = self.initialize_population()

@@ -138,7 +138,7 @@ class Game:
         # Print the top solutions and their fitness scores
         for i, solution in enumerate(top_solutions):
             print(f"Tower #{i + 1}: Best Accuracy: {round(solution[0], 2)}, Best Cooldown: {solution[1]}, "
-                  f"Best Range: {solution[2]}, Best Firepower: {solution[3]}, Critical Chance: {round(solution[4], 2)}",
+                  f"Best Range: {solution[2]}, Best Damage: {solution[3]}, Critical Chance: {round(solution[4], 2)}",
                   f"Fitness score: {round(top_fitnesses[i], 2)}")
         # Update the tower strategies with the top solutions
         self.update_tower_strategies(top_solutions)
