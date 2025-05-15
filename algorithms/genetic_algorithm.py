@@ -4,7 +4,7 @@ import settings
 class GeneticAlgorithm:
     def __init__(self, tower_type):
         self.num_generations = 5
-        self.num_genes = 4  # accuracy, cooldown, range, firepower
+        self.num_genes = 5  # accuracy, cooldown, range, firepower, critical_chance
         self.population_size = 10
         self.tower_type = tower_type
         self.population = self.initialize_population()
@@ -23,7 +23,7 @@ class GeneticAlgorithm:
 
         # For demonstration purposes, we will initialize the population with the worst possible values
         for i in range(self.population_size):
-            first_population.append([0.01, cooldown_max, range_min, damage_min])
+            first_population.append([0.01, cooldown_max, range_min, damage_min, 0.0])  # Worst values
         return first_population
 
     def fitness_function(self, individual):

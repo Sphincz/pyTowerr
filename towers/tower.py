@@ -25,6 +25,7 @@ class Tower(pg.sprite.Sprite):
         self.range = range_min  # Worst range is the smallest value
         damage_min, _ = settings.TOWER_TYPES[tower_type]['damage']
         self.damage = damage_min  # Worst damage is the smallest value
+        self.crit_chance = 0.0  # Worst critical chance is 0.0
 
         # position variables
         self.tile_x = tile_x
@@ -64,16 +65,18 @@ class Tower(pg.sprite.Sprite):
             "accuracy": self.accuracy,
             "cooldown": self.cooldown,
             "range": self.range,
-            "damage": self.damage
+            "damage": self.damage,
+            "crit_chance": self.crit_chance
         }
 
     def update_strategy_params(self, best_solution):
-        self.accuracy, self.cooldown, self.range, self.damage = best_solution
+        self.accuracy, self.cooldown, self.range, self.damage, self.crit_chance = best_solution
         self.strategy_params = {
             "accuracy": self.accuracy,
             "cooldown": self.cooldown,
             "range": self.range,
-            "damage": self.damage
+            "damage": self.damage,
+            "crit_chance": self.crit_chance
         }
 
     @staticmethod
@@ -119,11 +122,18 @@ class Tower(pg.sprite.Sprite):
 
             # Check for hit success
             if self.is_hit_successful():
-                self.target.health -= self.strategy_params['damage']
+                damage = self.strategy_params['damage']
+                critical_hit = random.random() <= self.strategy_params['crit_chance']
+                if critical_hit:
+                    damage *= 2  # Double damage
+                self.target.health -= damage
+
                 print(
                     f"Tower {self.tower_id} # Hit enemy at position {self.target.pos}. "
                     f"Accuracy: {round(self.strategy_params['accuracy'], 3)}, "
-                    f"Damage: {self.strategy_params['damage']}")
+                    f"Damage: {damage}.",
+                    f"Critical Chance: {round(self.strategy_params['crit_chance'], 2)}, "
+                    f"Critical Hit: {critical_hit}." if critical_hit else "")
                 self.shot_fx.play()
             else:
                 print(f"Tower {self.tower_id} # Missed shot")

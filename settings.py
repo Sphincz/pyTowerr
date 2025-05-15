@@ -20,12 +20,12 @@ GAME_MODE = "GENETIC_ALGORITHM"  # MANUAL, GENETIC_ALGORITHM, QLEARNING
 SPAWN_COOLDOWN = 400
 ENEMY_TYPES = {
     "zombie": {
-        "health": 10,
+        "health": 15,
         "speed": 2,
         "image": pg.image.load('assets/images/enemies/zombie.png'),
     },
     "warrior": {
-        "health": 20,
+        "health": 25,
         "speed": 3,
         "image": pg.image.load('assets/images/enemies/warrior.png'),
     },
@@ -53,13 +53,13 @@ TOWER_LEVELS = 2
 TOWER_TYPES = {
     "cannon1": {
         "range": [50, 100],
-        "cooldown": [100, 4000],
+        "cooldown": [200, 2000],
         "damage": [1, 3],
         "image": pg.image.load('assets/images/towers/cannon1.png'),
     },
     "cannon2": {
         "range": [90, 120],
-        "cooldown": [400, 4000],
+        "cooldown": [200, 2000],
         "damage": [3, 5],
         "image": pg.image.load('assets/images/towers/cannon2.png'),
     },
